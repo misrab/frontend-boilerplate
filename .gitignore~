@@ -7,6 +7,25 @@
 _obj
 _test
 
+# if jekyll used
+_site
+
+# typical node stuff
+.DS_Store
+*.log
+node_modules
+build
+*.node
+components
+coverage
+*.orig
+.idea
+sandbox
+test/out-fixtures/*
+test/watch-*.txt
+gulp.1
+
+
 # Architecture specific extensions/prefixes
 *.[568vq]
 [568vq].out
