@@ -6,6 +6,8 @@
 # Folders
 _obj
 _test
+# if jekyll used
+_site
 
 # Architecture specific extensions/prefixes
 *.[568vq]
