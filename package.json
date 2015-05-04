@@ -1,0 +1,32 @@
+{
+  "name": "frontend-boilerplate",
+  "version": "1.0.0",
+  "description": "React, bower, all the goodies",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/misrab/frontend-boilerplate.git"
+  },
+  "author": "Misrab M. Faizullah-Khan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/misrab/frontend-boilerplate/issues"
+  },
+  "homepage": "https://github.com/misrab/frontend-boilerplate",
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-bower": "0.0.10",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-notify": "^2.2.0",
+    "gulp-react": "^3.0.1",
+    "gulp-ruby-sass": "^1.0.5"
+  }
+}

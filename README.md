@@ -13,11 +13,9 @@ React, bower, all the goodies
 
 ## Flow
 
-1. Use `bower install [package] --save` to add js files to bower_components i.e. jquery...
-
-2. Use `gulp` to build (and watch for .scss but not .js changes)
-
-3. Use `jekyll serve` to load on localhost:4000
+- Use `bower install [package] --save` for client side js
+- Use `npm install [package] --save-dev` for development js
+- Run `gulp` for compilation and server on :8080
 
 
 ## Acknowledgements
