@@ -2,6 +2,7 @@ var gulp = require('gulp'), 
     sass = require('gulp-ruby-sass') 
     notify = require("gulp-notify") 
     bower = require('gulp-bower')
+    bowerRequireJS = require('bower-requirejs')
     minifyCSS = require('gulp-minify-css')
     uglify = require('gulp-uglify')
     nodemon = require('gulp-nodemon')
@@ -18,6 +19,18 @@ var config = {
 gulp.task('bower', function() { 
     return bower()
          .pipe(gulp.dest(config.bowerDir)) 
+});
+
+gulp.task('bower-requirejs', function(callback) {
+    var options = {
+        baseUrl: 'js/',
+        config: 'js/config.js',
+        transitive: true
+    };
+
+    bowerRequireJS(options, function (rjsConfigFromBower) {
+        callback();
+    });
 });
 
 
@@ -52,15 +65,15 @@ gulp.task('minify-css', function() {
 
 
 gulp.task('scripts', function() {
-  return gulp.src('./js/*.js')
-    .pipe(concat('all.js'))
+  return gulp.src('./js/[^_]*.js')
+    .pipe(concat('_all.js'))
     // .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./js/'));
 });
 
 
 gulp.task('clean', function(cb) {
-    del(['dist'], cb)
+    del(['dist/*'], cb)
 });
 
 
@@ -98,6 +111,6 @@ gulp.task('run', function () {
 
 
 
-  gulp.task('default', ['clean', 'bower', 'icons', 'css', 'minify-css', 'jsx', 'scripts', 'watch', 'run']);
+  gulp.task('default', ['clean', 'bower', 'bower-requirejs', 'icons', 'css', 'minify-css', 'jsx', 'scripts', 'watch', 'run']);
 
 

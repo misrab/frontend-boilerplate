@@ -14,7 +14,7 @@ require(['react', 'react-router'], function(React, Router) {
     var RouteHandler = Router.RouteHandler;
     var Link = Router.Link;
 
-    var App = React.createClass({
+    var App = React.createClass({displayName: "App",
       getInitialState: function () {
         console.log("running react");
 
@@ -23,29 +23,44 @@ require(['react', 'react-router'], function(React, Router) {
 
       render: function () {
         return (
-          <div className="App">
-            <RouteHandler/>
-          </div>
+          React.createElement("div", {className: "App"}, 
+            React.createElement(RouteHandler, null)
+          )
         );
       }
     });
 
-    var Index = React.createClass({
+    var Index = React.createClass({displayName: "Index",
       render: function () {
-        return <p>Select a state from the left</p>;
+        return React.createElement("p", null, "Select a state from the left");
       }
     });
 
 
     var routes = (
-      <Route handler={App}>
-        <DefaultRoute handler={Index}/>
-      </Route>
+      React.createElement(Route, {handler: App}, 
+        React.createElement(DefaultRoute, {handler: Index})
+      )
     );
 
     // <Route name="state" path="state/:abbr" handler={State}/>
 
     Router.run(routes, function (Handler) {
-      React.render(<Handler/>, document.body);
+      React.render(React.createElement(Handler, null), document.body);
     });
+});
+requirejs.config({
+  shim: {
+
+  },
+  paths: {
+    'bootstrap-sass-official': '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
+    jquery: '../bower_components/jquery/dist/jquery',
+    fontawesome: '../bower_components/fontawesome/fonts/*',
+    react: '../bower_components/react/react',
+    'react-router': '../bower_components/react-router/build/umd/ReactRouter'
+  },
+  packages: [
+
+  ]
 });
