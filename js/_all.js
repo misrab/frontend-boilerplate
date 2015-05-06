@@ -1,45 +1,34 @@
-// var React = require('react');
-// var Router = require('react-router');
 
-require(['react', 'react-router'], function(React, Router) {
+require(['./components/index', 'react', 'react-router', 'jquery'], 
+function(Components, React, Router, $) {
     //This function is called when scripts/helper/util.js is loaded.
     //If util.js calls define(), then this function is not fired until
     //util's dependencies have loaded, and the util argument will hold
     //the module value for "helper/util".
 
-    console.log("running main");
 
     var Route = Router.Route;
     var DefaultRoute = Router.DefaultRoute;
-    var RouteHandler = Router.RouteHandler;
+    var NotFoundRoute = Router.NotFoundRoute;
+    
     var Link = Router.Link;
-
-    var App = React.createClass({displayName: "App",
-      getInitialState: function () {
-        console.log("running react");
-
-        return {};
-      },
-
-      render: function () {
-        return (
-          React.createElement("div", {className: "App"}, 
-            React.createElement(RouteHandler, null)
-          )
-        );
-      }
-    });
-
-    var Index = React.createClass({displayName: "Index",
-      render: function () {
-        return React.createElement("p", null, "Select a state from the left");
-      }
-    });
 
 
     var routes = (
-      React.createElement(Route, {handler: App}, 
-        React.createElement(DefaultRoute, {handler: Index})
+      React.createElement(Route, {path: "/", handler: Components.App}, 
+
+        React.createElement(Route, {path: "app/", handler: Components.SidebarView}, 
+          React.createElement(Route, {name: "reporting", path: "reporting", handler: Components.Reporting}), 
+          React.createElement(Route, {name: "autobidding", path: "autobidding", handler: Components.AutoBidding}), 
+          React.createElement(Route, {name: "managed", path: "managed", handler: Components.Managed}), 
+
+          React.createElement(NotFoundRoute, {handler: Components.NotFound})
+        ), 
+
+
+        React.createElement(DefaultRoute, {handler: Components.Index}), 
+
+        React.createElement(NotFoundRoute, {handler: Components.NotFound})
       )
     );
 
@@ -48,19 +37,4 @@ require(['react', 'react-router'], function(React, Router) {
     Router.run(routes, function (Handler) {
       React.render(React.createElement(Handler, null), document.body);
     });
-});
-requirejs.config({
-  shim: {
-
-  },
-  paths: {
-    'bootstrap-sass-official': '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
-    jquery: '../bower_components/jquery/dist/jquery',
-    fontawesome: '../bower_components/fontawesome/fonts/*',
-    react: '../bower_components/react/react',
-    'react-router': '../bower_components/react-router/build/umd/ReactRouter'
-  },
-  packages: [
-
-  ]
 });

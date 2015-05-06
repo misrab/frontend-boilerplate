@@ -24,7 +24,7 @@ gulp.task('bower', function() { 
 gulp.task('bower-requirejs', function(callback) {
     var options = {
         baseUrl: 'js/',
-        config: 'js/config.js',
+        config: 'js/_config.js',
         transitive: true
     };
 
@@ -52,7 +52,7 @@ gulp.task('css', function() { 
             .on("error", notify.onError(function (error) {
                  return "Error: " + error.message;
              }))
-         .pipe(gulp.dest('./css')); 
+             .pipe(gulp.dest('./css')); 
 });
 
 gulp.task('minify-css', function() {
@@ -73,20 +73,29 @@ gulp.task('scripts', function() {
 
 
 gulp.task('clean', function(cb) {
-    del(['dist/*'], cb)
+    del(['dist/*', 'js/_all.js', 'js/[^_]*.js'], cb)
 });
+
+gulp.task('cleanJs', function(cb) {
+    del(['dist/*.js'], cb)
+});
+
+// scss err will stay forever otherwise
+// gulp.task('cleanCss', function(cb) {
+//     del(['css/style.css'], cb)
+// });
 
 
 // convert jsx to js
 gulp.task('jsx', function () {
-    return gulp.src('./js/*.jsx')
+    return gulp.src(['./js/*/*.jsx', './js/*.jsx'])
         .pipe(react())
         .pipe(gulp.dest('./js/'));
 });
 
 // Rerun the task when a file changes
  gulp.task('watch', function() {
-     gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
+     gulp.watch(config.sassPath + '/**/*.scss', ['css', 'minify-css']); 
     gulp.watch('./js/**/*.+(js|jsx)', ['jsx', 'scripts']);
 });
 

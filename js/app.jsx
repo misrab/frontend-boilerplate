@@ -1,45 +1,34 @@
-// var React = require('react');
-// var Router = require('react-router');
 
-require(['react', 'react-router'], function(React, Router) {
+require(['./components/index', 'react', 'react-router', 'jquery'], 
+function(Components, React, Router, $) {
     //This function is called when scripts/helper/util.js is loaded.
     //If util.js calls define(), then this function is not fired until
     //util's dependencies have loaded, and the util argument will hold
     //the module value for "helper/util".
 
-    console.log("running main");
 
     var Route = Router.Route;
     var DefaultRoute = Router.DefaultRoute;
-    var RouteHandler = Router.RouteHandler;
+    var NotFoundRoute = Router.NotFoundRoute;
+    
     var Link = Router.Link;
-
-    var App = React.createClass({
-      getInitialState: function () {
-        console.log("running react");
-
-        return {};
-      },
-
-      render: function () {
-        return (
-          <div className="App">
-            <RouteHandler/>
-          </div>
-        );
-      }
-    });
-
-    var Index = React.createClass({
-      render: function () {
-        return <p>Select a state from the left</p>;
-      }
-    });
 
 
     var routes = (
-      <Route handler={App}>
-        <DefaultRoute handler={Index}/>
+      <Route path="/" handler={Components.App}>
+
+        <Route path="app/" handler={Components.SidebarView}>
+          <Route name="reporting" path="reporting" handler={Components.Reporting}/>
+          <Route name="autobidding" path="autobidding" handler={Components.AutoBidding}/>
+          <Route name="managed" path="managed" handler={Components.Managed}/>
+
+          <NotFoundRoute handler={Components.NotFound} />
+        </Route>
+
+
+        <DefaultRoute handler={Components.Index} />
+
+        <NotFoundRoute handler={Components.NotFound} />
       </Route>
     );
 
