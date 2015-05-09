@@ -17,17 +17,18 @@ function(Components, React, Router, $) {
     var routes = (
       React.createElement(Route, {path: "/", handler: Components.App}, 
 
+        React.createElement(Route, {name: "login", path: "login", handler: Components.Login}), 
+
         React.createElement(Route, {path: "app/", handler: Components.SidebarView}, 
-          React.createElement(Route, {name: "reporting", path: "reporting", handler: Components.Reporting}), 
-          React.createElement(Route, {name: "autobidding", path: "autobidding", handler: Components.AutoBidding}), 
-          React.createElement(Route, {name: "managed", path: "managed", handler: Components.Managed}), 
+          "// ", React.createElement(Route, {name: "reporting", path: "reporting", handler: Components.Reporting}), 
+          "// ", React.createElement(Route, {name: "autobidding", path: "autobidding", handler: Components.AutoBidding}), 
+          "// ", React.createElement(Route, {name: "managed", path: "managed", handler: Components.Managed}), 
 
           React.createElement(NotFoundRoute, {handler: Components.NotFound})
         ), 
 
 
         React.createElement(DefaultRoute, {handler: Components.Index}), 
-
         React.createElement(NotFoundRoute, {handler: Components.NotFound})
       )
     );

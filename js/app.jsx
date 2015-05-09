@@ -17,17 +17,18 @@ function(Components, React, Router, $) {
     var routes = (
       <Route path="/" handler={Components.App}>
 
+        <Route name="login" path="login" handler={Components.Login} />
+
         <Route path="app/" handler={Components.SidebarView}>
-          <Route name="reporting" path="reporting" handler={Components.Reporting}/>
-          <Route name="autobidding" path="autobidding" handler={Components.AutoBidding}/>
-          <Route name="managed" path="managed" handler={Components.Managed}/>
+          // <Route name="reporting" path="reporting" handler={Components.Reporting}/>
+          // <Route name="autobidding" path="autobidding" handler={Components.AutoBidding}/>
+          // <Route name="managed" path="managed" handler={Components.Managed}/>
 
           <NotFoundRoute handler={Components.NotFound} />
         </Route>
 
 
         <DefaultRoute handler={Components.Index} />
-
         <NotFoundRoute handler={Components.NotFound} />
       </Route>
     );

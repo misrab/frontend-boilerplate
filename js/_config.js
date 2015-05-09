@@ -7,7 +7,8 @@ requirejs.config({
     jquery: '../bower_components/jquery/dist/jquery',
     fontawesome: '../bower_components/fontawesome/fonts/*',
     react: '../bower_components/react/react',
-    'react-router': '../bower_components/react-router/build/umd/ReactRouter'
+    'react-router': '../bower_components/react-router/build/umd/ReactRouter',
+    bootstrap: '../bower_components/bootstrap/dist/js/bootstrap'
   },
   packages: [
 
